@@ -8,9 +8,14 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* overflow-x: clip kills stray horizontal scroll (e.g. the off-canvas drawer parked
+   off-screen) without making the root a scroll container, so sticky positioning still
+   works — unlike overflow-x: hidden, which would break the sticky top bar. */
+html { scroll-behavior: smooth; overflow-x: clip; }
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -55,7 +60,9 @@ nav .doc-switch a.active {
 }
 
 /* Content */
-main { flex: 1; max-width: 860px; margin: 0 auto; padding: 40px 48px 120px; }
+/* min-width:0 lets this flex item shrink below its content's intrinsic width, so a
+   wide <pre>/table scrolls inside its own box instead of widening the whole page. */
+main { flex: 1; min-width: 0; max-width: 860px; margin: 0 auto; padding: 40px 48px 120px; }
 
 .md h1 { font-size: 34px; margin: 0 0 16px; color: #fff; }
 .md h2 {
@@ -167,7 +174,10 @@ main { flex: 1; max-width: 860px; margin: 0 auto; padding: 40px 48px 120px; }
     z-index: 40;
   }
 
-  main { flex: 1; padding: 24px 20px 80px; }
+  /* In the column layout, main's `margin: 0 auto` stops flexbox from stretching it,
+     so it sizes to content capped at max-width:860px — wider than a phone. Cap it at
+     100% so the text wraps to the viewport instead of overflowing. */
+  main { flex: 1; width: 100%; max-width: 100%; padding: 24px 20px 80px; }
 
   /* Let wide tables scroll instead of overflowing the viewport */
   .md table { display: block; overflow-x: auto; white-space: nowrap; }
