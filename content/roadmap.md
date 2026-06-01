@@ -175,7 +175,7 @@ match its query group before attention. `scaled_dot_product_attention` already s
 broadcasting K/V across query heads via `enable_gqa=True` on recent PyTorch.
 
 **Cost / trade-off.** Mostly an *inference* win; at small scale (and at lokoLM's
-`block_size=128`) the benefit is modest, which is exactly why it's deferred past v1.
+`block_size=512`) the benefit is modest, which is exactly why it's deferred past v1.
 
 ---
 
@@ -232,7 +232,7 @@ words become single tokens, rare words break into a few pieces, and any string i
 representable (no out-of-vocabulary problem, because it bottoms out at bytes).
 
 **Current design.** lokoLM is **byte-level**: `vocab_size = 256`, so every byte is its own
-token. With `block_size = 128` the model sees only ~128 bytes (~20–30 words) of context, and
+token. With `block_size = 512` the model sees only ~512 bytes (~80–120 words) of context, and
 sequences are as long as the raw text.
 
 **Why it improves things.**

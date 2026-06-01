@@ -4,8 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { DOCS } from "../lib/docs-meta.js";
 
+// Drop a trailing slash (except for root) so "/training/" matches "/training".
+function normalize(path) {
+  if (!path) return "/";
+  return path !== "/" && path.endsWith("/") ? path.slice(0, -1) : path;
+}
+
 export default function Sidebar() {
-  const pathname = usePathname();
+  const current = normalize(usePathname());
 
   return (
     <nav>
@@ -15,15 +21,15 @@ export default function Sidebar() {
       <div className="tag">decoder-only transformer</div>
       <div className="doc-switch">
         {DOCS.map((doc) => {
+          const href = normalize(doc.href);
           const active =
-            doc.href === "/"
-              ? pathname === "/"
-              : pathname.startsWith(doc.href);
+            href === "/" ? current === "/" : current === href || current.startsWith(href + "/");
           return (
             <Link
               key={doc.slug}
               href={doc.href}
               className={active ? "active" : ""}
+              aria-current={active ? "page" : undefined}
             >
               {doc.label}
             </Link>

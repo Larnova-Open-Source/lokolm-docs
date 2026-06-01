@@ -140,9 +140,18 @@ that wrapping is straightforward when you need it.
 
 ## 6. Checkpoints
 
-The script saves `ckpt.pt` at the end. To resume or generate:
+The script saves `ckpt.pt` at the end — a dict holding both the weights and the model
+config:
 ```python
-model.load_state_dict(torch.load("ckpt.pt", map_location=device))
+ckpt = torch.load("ckpt.pt", map_location=device)
+model = LokoLM(**ckpt["config"])
+model.load_state_dict(ckpt["model"])
 ```
+Storing the config alongside the weights means anything loading the checkpoint (such as
+the inference script) rebuilds the exact model without hardcoding a config that has to
+stay in sync with this file.
+
 Note: if you trained with `torch.compile`, the state-dict keys are prefixed with
 `_orig_mod.` — load into the compiled model, or strip the prefix when loading into a raw one.
+
+Once you have a checkpoint, see the [Inference](inference.md) guide for generating text.

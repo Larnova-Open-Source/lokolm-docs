@@ -129,21 +129,25 @@ optional top-k).
 ```python
 from lokolm import LokoLM
 
-model = LokoLM(vocab_size=256, block_size=128,
-               d_model=384, n_heads=6, n_layers=6)
+model = LokoLM(vocab_size=256, block_size=512,
+               d_model=768, n_heads=12, n_layers=12)
 logits, loss = model(idx, targets)          # training forward
 out = model.generate(idx, max_new_tokens=100, top_k=50)
 ```
 
 ## Default hyperparameters
 
-| Name | Default | Meaning |
+The values below are the GPT-2-small-class config in [train.py](../../model/train.py)
+(~85M parameters at the byte-level vocab). They're plain knobs — scale them down for a
+quick CPU run or up for more capacity.
+
+| Name | Value | Meaning |
 |------|---------|---------|
 | `vocab_size` | 256 | Token vocabulary (byte-level demo) |
-| `block_size` | 128 | Maximum context length |
-| `d_model` | 384 | Embedding / hidden dimension |
-| `n_heads` | 6 | Attention heads |
-| `n_layers` | 6 | Stacked decoder blocks |
+| `block_size` | 512 | Maximum context length |
+| `d_model` | 768 | Embedding / hidden dimension |
+| `n_heads` | 12 | Attention heads |
+| `n_layers` | 12 | Stacked decoder blocks |
 | `mlp_ratio` | 4 | FFN expansion factor |
 | `learning_rate` | 3e-4 | Peak LR (warmup -> cosine decay) |
 
