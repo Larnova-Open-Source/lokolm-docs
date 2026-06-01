@@ -31,8 +31,9 @@ nav {
   height: 100vh;
   overflow-y: auto;
 }
-nav .brand { font-size: 22px; font-weight: 700; padding: 0 24px 4px; color: #fff; }
-nav .brand span { color: var(--accent); }
+nav .brand { display: flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 700; padding: 0 24px 4px; color: #fff; }
+nav .brand .brand-logo { width: 28px; height: 28px; object-fit: contain; flex: none; }
+nav .brand .brand-name span { color: var(--accent); }
 nav .tag { padding: 0 24px 16px; color: var(--muted); font-size: 13px; }
 nav .doc-switch { padding: 0 16px; }
 nav .doc-switch a {

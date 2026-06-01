@@ -16,7 +16,8 @@ export default function Sidebar() {
   return (
     <nav>
       <div className="brand">
-        loko<span>LM</span>
+        <img src="/logo.png" alt="lokoLM logo" className="brand-logo" width={28} height={28} />
+        <span className="brand-name">loko<span>LM</span></span>
       </div>
       <div className="tag">decoder-only transformer</div>
       <div className="doc-switch">

@@ -6,6 +6,7 @@ export const metadata = {
   title: "lokoLM — Documentation",
   description:
     "Documentation for lokoLM, a minimal decoder-only Transformer language model for teaching and research.",
+  icons: { icon: "/logo.png" },
 };
 
 export default function RootLayout({ children }) {
