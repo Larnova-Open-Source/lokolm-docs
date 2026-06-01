@@ -27,7 +27,7 @@ This is the most important rule.
 lokoLM is **pretrained with self-supervised next-token prediction**: it learns language by
 predicting the next byte in raw text. It has **no labels, no annotations, no input→output
 pairs**. The training loop
-([train.py](https://github.com/Larnova-Open-Source/lokolm/blob/main/train.py)) just reads a
+([train.py](https://github.com/larnova-open-source/lokolm/blob/main/train.py)) just reads a
 stream of bytes and learns to continue it.
 
 **So all contributed data must be plain, unlabelled text.**
@@ -89,9 +89,9 @@ checkpoint = {"model": state_dict, "config": {...}}   # written by train.py
 
 **Guidelines:**
 - **Must load with the current code.** It has to be loadable by
-  [sample.py](https://github.com/Larnova-Open-Source/lokolm/blob/main/sample.py) — i.e. the
+  [sample.py](https://github.com/larnova-open-source/lokolm/blob/main/sample.py) — i.e. the
   `{"model", "config"}` format produced by the current
-  [train.py](https://github.com/Larnova-Open-Source/lokolm/blob/main/train.py). Strip the
+  [train.py](https://github.com/larnova-open-source/lokolm/blob/main/train.py). Strip the
   `_orig_mod.` prefix yourself if you trained with `torch.compile`, or note it.
 - **Document the run.** Include the **config** (or confirm it's the saved default), what
   **data** it was trained on (and that data's license — same rules as above: unlabelled,
@@ -113,7 +113,7 @@ Open an **issue** with a **download link** and the details above.
 ## License
 
 lokoLM is released under the **MIT License** (see
-[LICENSE](https://github.com/Larnova-Open-Source/lokolm-docs/blob/main/LICENSE)). By
+[LICENSE](https://github.com/larnova-open-source/lokolm-docs/blob/main/LICENSE)). By
 contributing, you confirm you have the right to share what you submit and agree it may be
 used under that license.
 

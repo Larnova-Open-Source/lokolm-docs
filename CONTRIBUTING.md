@@ -8,9 +8,9 @@ guide before opening a pull request or issue.
 ([LinkedIn](https://www.linkedin.com/in/mahmud-adinoyi-684020235/)).
 
 > This is the copy living in the lokoLM **docs** repository
-> ([lokolm-docs](https://github.com/Larnova-Open-Source/lokolm-docs)). The same guide is also
+> ([lokolm-docs](https://github.com/larnova-open-source/lokolm-docs)). The same guide is also
 > published as a [docs page](content/contributing.md) and in the
-> [lokolm](https://github.com/Larnova-Open-Source/lokolm) model repository.
+> [lokolm](https://github.com/larnova-open-source/lokolm) model repository.
 
 ---
 
@@ -37,7 +37,7 @@ This is the most important rule.
 lokoLM is **pretrained with self-supervised next-token prediction**: it learns language by
 predicting the next byte in raw text. It has **no labels, no annotations, no input→output
 pairs**. The training loop
-([`train.py`](https://github.com/Larnova-Open-Source/lokolm/blob/main/train.py), in the
+([`train.py`](https://github.com/larnova-open-source/lokolm/blob/main/train.py), in the
 lokolm repository) just reads a stream of bytes and learns to continue it.
 
 **So all contributed data must be plain, unlabelled text.**
@@ -105,9 +105,9 @@ checkpoint = {"model": state_dict, "config": {...}}   # written by train.py
 
 **Guidelines:**
 - **Must load with the current code.** It has to be loadable by
-  [`sample.py`](https://github.com/Larnova-Open-Source/lokolm/blob/main/sample.py) — i.e. the
+  [`sample.py`](https://github.com/larnova-open-source/lokolm/blob/main/sample.py) — i.e. the
   `{"model", "config"}` format produced by the current
-  [`train.py`](https://github.com/Larnova-Open-Source/lokolm/blob/main/train.py) (both in the
+  [`train.py`](https://github.com/larnova-open-source/lokolm/blob/main/train.py) (both in the
   lokolm repository). Strip the `_orig_mod.` prefix yourself if you trained with
   `torch.compile`, or note it.
 - **Document the run.** Include the **config** (or confirm it's the saved default), what

@@ -67,7 +67,8 @@ main { flex: 1; max-width: 860px; margin: 0 auto; padding: 40px 48px 120px; }
   scroll-margin-top: 20px;
 }
 .md h3 { font-size: 18px; margin: 26px 0 10px; color: #fff; scroll-margin-top: 20px; }
-.md p, .md li { color: var(--text); }
+.md p, .md li { color: var(--text); overflow-wrap: break-word; }
+.md a { overflow-wrap: break-word; }
 
 .md code {
   background: #1b2129;
@@ -108,7 +109,68 @@ main { flex: 1; max-width: 860px; margin: 0 auto; padding: 40px 48px 120px; }
   color: var(--text);
 }
 
+/* Mobile chrome — hidden on desktop, shown at the breakpoint below */
+.topbar { display: none; }
+.nav-backdrop { display: none; }
+
 @media (max-width: 820px) {
-  nav { display: none; }
-  main { padding: 24px 20px 80px; }
+  /* Stack the top bar above the content; the nav becomes an overlay drawer. */
+  .layout { flex-direction: column; }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    padding: 11px 16px;
+    background: var(--panel);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar-brand { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 700; color: #fff; }
+  .topbar-brand span { color: var(--accent); }
+
+  .menu-btn {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 40px;
+    height: 38px;
+    padding: 9px 8px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .menu-btn span { display: block; height: 2px; width: 100%; background: var(--text); border-radius: 2px; }
+
+  /* Off-canvas drawer */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    z-index: 50;
+  }
+  nav.open { transform: translateX(0); box-shadow: 0 0 40px rgba(0, 0, 0, 0.5); }
+
+  .nav-backdrop.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 40;
+  }
+
+  main { flex: 1; padding: 24px 20px 80px; }
+
+  /* Let wide tables scroll instead of overflowing the viewport */
+  .md table { display: block; overflow-x: auto; white-space: nowrap; }
+  .md h1 { font-size: 28px; }
+  .md h2 { font-size: 21px; }
 }
