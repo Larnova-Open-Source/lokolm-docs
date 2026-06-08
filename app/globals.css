@@ -59,6 +59,13 @@ nav .doc-switch a.active {
   border-color: var(--accent);
 }
 
+/* Standalone (non-doc) nav links, set off from the doc list by a divider. */
+nav .doc-switch-extra {
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+}
+
 /* Content */
 /* min-width:0 lets this flex item shrink below its content's intrinsic width, so a
    wide <pre>/table scrolls inside its own box instead of widening the whole page. */
@@ -114,6 +121,86 @@ main { flex: 1; min-width: 0; max-width: 860px; margin: 0 auto; padding: 40px 48
   padding: 4px 16px;
   border-radius: 0 8px 8px 0;
   color: var(--text);
+}
+
+/* Contribute Data — upload form */
+.intake-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 28px;
+  max-width: 640px;
+}
+.intake-field { display: flex; flex-direction: column; gap: 6px; }
+.intake-field > span { font-size: 14px; font-weight: 600; color: #fff; }
+.intake-field em { color: var(--muted); font-style: normal; font-weight: 400; }
+.intake-hint { color: var(--muted); font-size: 12.5px; }
+
+/* Drag-and-drop file zone (wraps a hidden <input type="file">) */
+.intake-drop {
+  border: 1.5px dashed var(--border);
+  border-radius: 8px;
+  padding: 28px 18px;
+  text-align: center;
+  cursor: pointer;
+  background: var(--bg);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.intake-drop:hover { border-color: var(--accent); }
+.intake-drop:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.intake-drop.is-over { border-color: var(--accent); background: rgba(88, 166, 255, 0.08); }
+.intake-drop.is-disabled { opacity: 0.6; cursor: not-allowed; }
+.intake-drop-prompt { display: flex; flex-direction: column; align-items: center; gap: 6px; color: var(--muted); font-size: 14px; }
+.intake-drop-prompt strong { color: var(--text); }
+.intake-drop-icon { font-size: 22px; line-height: 1; color: var(--accent); }
+.intake-drop-link { color: var(--accent); text-decoration: underline; }
+.intake-drop-file { display: flex; flex-direction: column; gap: 4px; }
+.intake-drop-file strong { color: #fff; word-break: break-all; }
+
+.intake-row { display: flex; gap: 16px; }
+.intake-row .intake-field { flex: 1; min-width: 0; }
+
+.intake-form input[type="email"],
+.intake-form select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 11px;
+  font-size: 14px;
+  font-family: inherit;
+  width: 100%;
+}
+.intake-form input:focus,
+.intake-form select:focus { outline: none; border-color: var(--accent); }
+.intake-form input:disabled,
+.intake-form select:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.intake-check { display: flex; gap: 10px; align-items: flex-start; font-size: 13.5px; color: var(--text); }
+.intake-check input { margin-top: 3px; flex: none; }
+
+.intake-submit {
+  align-self: flex-start;
+  background: var(--accent);
+  color: #0d1117;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.intake-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.intake-status { font-size: 14px; margin: 4px 0 0; }
+.intake-status-error { color: #f85149; }
+.intake-status-done { color: #3fb950; }
+.intake-status-hashing,
+.intake-status-requesting,
+.intake-status-uploading { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .intake-row { flex-direction: column; gap: 20px; }
 }
 
 /* Mobile chrome — hidden on desktop, shown at the breakpoint below */

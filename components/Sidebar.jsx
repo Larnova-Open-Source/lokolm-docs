@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DOCS } from "../lib/docs-meta.js";
+import { DOCS, EXTRA_LINKS } from "../lib/docs-meta.js";
 
 // Drop a trailing slash (except for root) so "/training/" matches "/training".
 function normalize(path) {
@@ -68,6 +68,23 @@ export default function Sidebar() {
                 onClick={() => setOpen(false)}
               >
                 {doc.label}
+              </Link>
+            );
+          })}
+        </div>
+        <div className="doc-switch doc-switch-extra">
+          {EXTRA_LINKS.map((link) => {
+            const href = normalize(link.href);
+            const active = current === href || current.startsWith(href + "/");
+            return (
+              <Link
+                key={link.slug}
+                href={link.href}
+                className={active ? "active" : ""}
+                aria-current={active ? "page" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
               </Link>
             );
           })}

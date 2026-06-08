@@ -63,7 +63,7 @@ import os; os.rename(next(iter(up)), "input.txt")
 ```
 
 > Use **unlabelled raw text** — lokoLM is a self-supervised next-token model, not an
-> instruction/labelled model. See [Contributing](contributing.md) for what counts.
+> instruction/labelled model. See [Contribute Data](/contribute) to add text to the corpus.
 
 ## 5. Train
 
